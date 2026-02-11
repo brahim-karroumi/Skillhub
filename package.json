@@ -1,0 +1,20 @@
+{
+    "name": "skillhub-backend",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Backend for SkillHub",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "author": "SkillHub",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^17.2.4",
+        "express": "^4.22.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.11"
+    }
+}
