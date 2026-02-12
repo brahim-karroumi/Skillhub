@@ -83,10 +83,21 @@ const getDataPath = (fileName: string) => {
 
 ### 5. ✅ `package.json`
 
-**Added Script**:
+**Updated Build Script**:
 ```json
-"vercel-build": "tsc"
+"build": "tsc && npm run copy-views && npm run copy-data",
+"copy-views": "mkdir -p dist/src/views && cp -r src/views/* dist/src/views/",
+"copy-data": "mkdir -p dist/src/data && cp -r src/data/* dist/src/data/"
 ```
+
+**Why**: TypeScript only compiles `.ts` files. We need to manually copy:
+- EJS view templates (`src/views/*.ejs`)
+- Initial JSON data files (`src/data/*.json`)
+
+### 6. ✅ Deleted `.vercelignore`
+
+**Problem**: Initially created a `.vercelignore` that blocked source files
+**Solution**: Removed it - Vercel needs TypeScript source files to compile!
 
 ---
 

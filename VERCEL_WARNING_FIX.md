@@ -74,10 +74,23 @@ SkillHub/
 ✅ **Better performance** - Optimized by Vercel automatically  
 ✅ **Future-proof** - Won't break when Vercel removes legacy features  
 
+## Files That Fixed the Build Error:
+
+### Updated `package.json` Build Script:
+```json
+"build": "tsc && npm run copy-views && npm run copy-data"
+```
+
+**Why**: TypeScript only compiles `.ts` files, but we need EJS views and JSON data too!
+
+### Deleted `.vercelignore`:
+- Was blocking source files from upload
+- Vercel needs TypeScript files to compile
+
 ## Ready to Deploy:
 
 ```bash
-# Build your project
+# Build your project locally (optional - Vercel will do this)
 npm run build
 
 # Deploy to Vercel
