@@ -6,6 +6,7 @@ function addSkill(req: AuthRequest, res: Response) {
         const user = req.user;
         const skills = readData("skills.json");
         const { title, description } = req.body;
+        console.log(req.body);
         if (!title) {
             return res.status(400).json({ message: "Title is required" });
         }
@@ -17,7 +18,9 @@ function addSkill(req: AuthRequest, res: Response) {
             createdAt: new Date(),
         }
         writeData("skills.json", [...skills, skill]);
-        return res.status(201).json({ message: "Skill created successfully", skill });
+        
+        // Redirect back to dashboard after adding
+        return res.redirect('/api/v1/skills');
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });
@@ -28,7 +31,8 @@ function getAllSkills(req: AuthRequest, res: Response) {
     try {
         const skills = readData("skills.json");
 
-        return res.status(200).json({ message: "Skills fetched successfully", skills });
+        console.log(skills);
+        return res.status(200).render("dashboard" , { skills });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });
@@ -65,7 +69,9 @@ function deleteSkill(req: AuthRequest, res: Response) {
         }
         const filteredSkills = skills.filter((skill: Skill) => skill.id !== Number(id))
         writeData("skills.json", filteredSkills);
-        return res.status(200).json({ message: "Skill deleted successfully" });
+        
+        // Redirect back to dashboard after deleting
+        return res.redirect('/api/v1/skills');
     } catch (error) {
         console.log(error);
         return res.status(500).json({ message: "Internal server error" });

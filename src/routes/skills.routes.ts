@@ -5,9 +5,9 @@ import  verifyToken  from "@/src/middlewares/auth";
 
 const router = Router();
 
-router.get("/" , getAllSkills);
-router.post("/" ,verifyToken, addSkill);
-router.put("/:id" ,verifyToken, updateSkill);
-router.delete("/:id" ,verifyToken, deleteSkill);
+router.get("/" , verifyToken, getAllSkills);
+router.post("/" , verifyToken, addSkill);
+router.put("/:id" , verifyToken, updateSkill);
+router.post("/delete/:id" , verifyToken, deleteSkill);
 
 export default router;

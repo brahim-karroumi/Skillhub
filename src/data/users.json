@@ -12,5 +12,12 @@
     "email": "brahim@gmail.com",
     "role": "USER",
     "password": "$2b$10$6uQTF2asMGzgSFGe9pYqoOmS6bopmpXGt4jfGB3w3qTMypLbNGt0W"
+  },
+  {
+    "id": 3,
+    "name": "ibrahim",
+    "email": "brahim@lafactory.com",
+    "role": "USER",
+    "password": "$2b$10$bLiSEsKioZWFQZwpc4rrYOhzpiVu62LB3C5p.19JXB6S2iDc4lNT."
   }
 ]

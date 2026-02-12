@@ -22,13 +22,14 @@ async function register(req: RegisterBody, res: Response) {
             role: role || "USER",
             password: hashedPassword
         }
-        console.log("===============")
         writeData("users.json", [...users, user]);
-        console.log("===============")
-        return res.status(201).json({ message: "User created successfully", user });
+        
+        // Redirect to login page after successful registration
+        return res.redirect('/login');
 
     } catch (error) {
         console.log(error);
+        return res.status(500).json({ message: "Internal server error" });
         return res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -53,7 +54,15 @@ async function login(req: LoginBody, res: Response) {
             return res.status(500).json({ message: "Internal server error" });
         }
         const token = jwt.sign({ id: user.id, role: user.role, email: user.email }, JWT_SECRET, { expiresIn: "2minutes" })
-        return res.status(200).json({ message: "Login successful", token });
+        
+        // Store token in cookie and redirect to dashboard
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 2 * 60 * 1000 // 2 minutes
+        });
+        
+        return res.redirect('/api/v1/skills');
 
     } catch (error) {
         console.log(error);
