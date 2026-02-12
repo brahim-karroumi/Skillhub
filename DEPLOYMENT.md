@@ -13,7 +13,7 @@
 
 ### 3. **Missing Vercel Configuration**
 - **Problem**: No `vercel.json` to tell Vercel how to deploy
-- **Solution**: Created `vercel.json` with proper routing
+- **Solution**: Created `vercel.json` with modern routing (no deprecated `builds` field) and `api/` directory for serverless function
 
 ---
 

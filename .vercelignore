@@ -1,0 +1,25 @@
+# Vercel Ignore File
+# Files and directories that don't need to be uploaded to Vercel
+
+# Source files (we upload dist/ instead)
+src/
+index.ts
+*.ts
+
+# Development files
+node_modules/
+.env
+.env.local
+
+# Build artifacts
+*.log
+npm-debug.log*
+
+# Documentation
+CHANGES.md
+DEPLOYMENT.md
+README.md
+
+# Git
+.git/
+.gitignore

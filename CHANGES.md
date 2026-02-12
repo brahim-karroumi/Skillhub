@@ -10,28 +10,30 @@ Your application was crashing on Vercel with `FUNCTION_INVOCATION_FAILED` becaus
 
 ### 1. ✅ `vercel.json` (NEW)
 
-**Purpose**: Tells Vercel how to build and route your application
+**Purpose**: Tells Vercel how to route your application (using modern config without deprecated `builds` field)
 
 ```json
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
+      "source": "/(.*)",
+      "destination": "/api"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/index.js"
-    }
-  ],
-  "outputDirectory": "dist"
+  ]
 }
 ```
 
-### 2. ✅ `index.ts`
+### 2. ✅ `api/index.js` (NEW)
+
+**Purpose**: Vercel serverless function entry point that imports your Express app
+
+```javascript
+import app from '../dist/index.js';
+export default app;
+```
+
+### 3. ✅ `index.ts`
 
 **Changes**:
 - Wrapped `app.listen()` in an environment check
@@ -59,7 +61,7 @@ if (process.env.NODE_ENV !== "production") {
 export default app;
 ```
 
-### 3. ✅ `src/utils/fileDB.ts`
+### 4. ✅ `src/utils/fileDB.ts`
 
 **Changes**:
 - Added detection for Vercel environment
@@ -79,7 +81,7 @@ const getDataPath = (fileName: string) => {
 };
 ```
 
-### 4. ✅ `package.json`
+### 5. ✅ `package.json`
 
 **Added Script**:
 ```json
