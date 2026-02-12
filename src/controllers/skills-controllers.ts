@@ -1,5 +1,7 @@
-import { readData, writeData } from "#src/utils/fileDB.js";
-function addSkill(req, res) {
+import { readData, writeData } from "@/src/utils/fileDB";
+import { AuthRequest, Skill } from "@/src/types/index";
+import { Response } from "express";
+function addSkill(req: AuthRequest, res: Response) {
     try {
         const user = req.user;
         const skills = readData("skills.json");
@@ -7,9 +9,9 @@ function addSkill(req, res) {
         if (!title) {
             return res.status(400).json({ message: "Title is required" });
         }
-        const skill = {
+        const skill : Skill = {
             id: skills.length + 1,
-            userId: user.id,
+            userId: user?.id as number,
             title,
             description: description || "",
             createdAt: new Date(),
@@ -22,7 +24,7 @@ function addSkill(req, res) {
     }
 }
 
-function getAllSkills(req, res) {
+function getAllSkills(req: AuthRequest, res: Response) {
     try {
         const skills = readData("skills.json");
 
@@ -33,12 +35,12 @@ function getAllSkills(req, res) {
     }
 }
 
-function updateSkill(req, res) {
+function updateSkill(req: AuthRequest, res: Response) {
     try {
         const { id } = req.params;
         const { title, description } = req.body;
         const skills = readData("skills.json");
-        const skill = skills.find(skill => skill.id === Number(id))
+        const skill = skills.find((skill: Skill) => skill.id === Number(id))
         if (!skill) {
             return res.status(404).json({ message: "Skill not found" });
         }
@@ -53,15 +55,15 @@ function updateSkill(req, res) {
     }
 }
 
-function deleteSkill(req, res) {
+function deleteSkill(req: AuthRequest, res: Response) {
     try {
         const { id } = req.params;
         const skills = readData("skills.json");
-        const skill = skills.find(skill => skill.id === Number(id))
+        const skill = skills.find((skill: Skill) => skill.id === Number(id))
         if (!skill) {
             return res.status(404).json({ message: "Skill not found" });
         }
-        const filteredSkills = skills.filter(skill => skill.id !== Number(id))
+        const filteredSkills = skills.filter((skill: Skill) => skill.id !== Number(id))
         writeData("skills.json", filteredSkills);
         return res.status(200).json({ message: "Skill deleted successfully" });
     } catch (error) {

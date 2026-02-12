@@ -1,6 +1,6 @@
 import { Router } from "express"
-import { getAllSkills , addSkill , updateSkill, deleteSkill} from "#src/controllers/skills-controllers.js";
-import  verifyToken  from "#src/middlewares/auth.js";
+import { getAllSkills , addSkill , updateSkill, deleteSkill} from "@/src/controllers/skills-controllers";
+import  verifyToken  from "@/src/middlewares/auth";
 
 
 const router = Router();
