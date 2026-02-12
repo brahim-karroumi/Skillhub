@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "hafid",
+    "email": "hafid@gmail.com",
+    "role": "USER",
+    "password": "$2b$10$elO/RuIfjbbXamMMCPbzqurb6p/KxiPsve1zShWV3NuHx7le8ia.a"
+  },
+  {
+    "id": 2,
+    "name": "brahim",
+    "email": "brahim@gmail.com",
+    "role": "USER",
+    "password": "$2b$10$6uQTF2asMGzgSFGe9pYqoOmS6bopmpXGt4jfGB3w3qTMypLbNGt0W"
+  }
+]
