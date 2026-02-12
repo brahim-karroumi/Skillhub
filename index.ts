@@ -33,7 +33,13 @@ app.get("/dashboard", (req: Request, res: Response) => {
 });
 
 
-const PORT = parseInt(process.env.PORT || "10000");
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// For local development
+if (process.env.NODE_ENV !== "production") {
+    const PORT = parseInt(process.env.PORT || "10000");
+    app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+    });
+}
+
+// Export for Vercel serverless
+export default app;
